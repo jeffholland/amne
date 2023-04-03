@@ -1,6 +1,8 @@
 import tkinter as tk
 
+from constants import PADDING, W_NUM_DIV, H_NUM_DIV
 from colors import Colors
+from data import Data
 from fonts import Fonts
 
 class Application(tk.Frame):
@@ -11,13 +13,15 @@ class Application(tk.Frame):
         self.calculate_dims()
         self.get_colors()
         self.set_fonts()
+        self.get_data()
 
         self.create_widgets()
 
     def create_widgets(self):
         label = tk.Label(
             self, 
-            text="amne", 
+            text=self.default_data[1], 
+            wraplength=self.width - (PADDING * 2),
             foreground=self.colors["HL2"],
             background=self.colors["BG2"],
             font=self.default_font
@@ -25,8 +29,8 @@ class Application(tk.Frame):
         label.grid(
             row=0, 
             column=0,
-            ipadx=10,
-            ipady=10,
+            ipadx=PADDING,
+            ipady=PADDING,
             sticky=tk.NSEW
         )
         self.columnconfigure(0, minsize=self.width)
@@ -37,15 +41,12 @@ class Application(tk.Frame):
         self.screen_width = self.winfo_screenwidth()
         self.screen_height = self.winfo_screenheight()
 
-        w_num_div = 6
-        h_num_div = 6
-
-        w_div = self.screen_width // w_num_div
-        h_div = self.screen_height // h_num_div
+        w_div = self.screen_width // W_NUM_DIV
+        h_div = self.screen_height // H_NUM_DIV
 
         self.width = w_div
         self.height = h_div
-        self.x_offset = w_div * (w_num_div - 1)
+        self.x_offset = w_div * (W_NUM_DIV - 1)
 
     def get_colors(self):
         self.colors_obj = Colors(self)
@@ -54,6 +55,10 @@ class Application(tk.Frame):
     def set_fonts(self):
         self.fonts_obj = Fonts(self)
         self.default_font = self.fonts_obj.default_font
+
+    def get_data(self):
+        self.data_obj = Data(self)
+        self.default_data = self.data_obj.get_notes_data("computers.json")
 
 
 app = Application()
