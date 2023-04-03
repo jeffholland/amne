@@ -1,0 +1,10 @@
+[
+    {
+        "name": "computers",
+        "in_rotation": true
+    },
+    {
+        "name": "russian_revolution",
+        "in_rotation": false
+    }
+]
