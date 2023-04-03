@@ -1,0 +1,4 @@
+[
+    "A Von Neumann bottleneck is when an instruction fetch and a data operation cannot occur at the same time because they share a common bus.",
+    "A chipset mediates communication between the CPU and other components"
+]
